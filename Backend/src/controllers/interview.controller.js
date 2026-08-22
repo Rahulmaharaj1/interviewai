@@ -30,11 +30,7 @@ async function generateInterViewReportController(req, res) {
         }
 
         // Parse PDF
-        const pdfData = await (
-            new pdfParse.PDFParse(
-                Uint8Array.from(req.file.buffer)
-            )
-        ).getText();
+        const pdfData = await pdfParse(req.file.buffer);
 
         const { selfDescription, jobDescription } = req.body;
 
