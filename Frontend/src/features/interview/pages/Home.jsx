@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router'
 import "../style/home.scss"
@@ -6,11 +7,10 @@ import { useInterview } from '../hooks/useInterview.js'
 const Home = () => {
 
     const { loading, generateReport, reports } = useInterview()
-
     const [jobDescription, setJobDescription] = useState("")
     const [selfDescription, setSelfDescription] = useState("")
-
     const resumeInputRef = useRef()
+
     const navigate = useNavigate()
 
     const handleGenerateReport = async () => {
@@ -27,7 +27,7 @@ const Home = () => {
                 navigate(`/interview/${data._id}`)
             }
         } catch (error) {
-            console.error("Generate Interview Report Error:", error)
+            console.error("Generate Report Error:", error)
         }
     }
 
@@ -42,24 +42,55 @@ const Home = () => {
     return (
         <div className='home-page'>
 
+            {/* Login / Register Links */}
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '18px',
+                    marginBottom: '20px',
+                    paddingTop: '10px'
+                }}
+            >
+                <Link
+                    to="/login"
+                    style={{
+                        color: '#ff2d8d',
+                        fontWeight: '600',
+                        textDecoration: 'underline',
+                        cursor: 'pointer'
+                    }}
+                >
+                    Login
+                </Link>
+
+                <span style={{ color: '#777' }}>|</span>
+
+                <Link
+                    to="/register"
+                    style={{
+                        color: '#ff2d8d',
+                        fontWeight: '600',
+                        textDecoration: 'underline',
+                        cursor: 'pointer'
+                    }}
+                >
+                    Register
+                </Link>
+            </div>
+
             {/* Page Header */}
             <header className='page-header'>
-
-                <div className="auth-links">
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
-                </div>
-
                 <h1>
-                    Create Your Custom{" "}
+                    Create Your Custom{' '}
                     <span className='highlight'>Interview Plan</span>
                 </h1>
 
                 <p>
-                    Let our AI analyze the job requirements and your unique
-                    profile to build a winning strategy.
+                    Let our AI analyze the job requirements and your unique profile
+                    to build a winning strategy.
                 </p>
-
             </header>
 
             {/* Main Card */}
@@ -67,7 +98,7 @@ const Home = () => {
 
                 <div className='interview-card__body'>
 
-                    {/* Left Panel */}
+                    {/* Left Panel - Job Description */}
                     <div className='panel panel--left'>
 
                         <div className='panel__header'>
@@ -122,7 +153,7 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
                     {/* Vertical Divider */}
                     <div className='panel-divider' />
 
-                    {/* Right Panel */}
+                    {/* Right Panel - Profile */}
                     <div className='panel panel--right'>
 
                         <div className='panel__header'>
@@ -152,13 +183,11 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
                         <div className='upload-section'>
 
                             <label className='section-label'>
-
                                 Upload Resume
 
                                 <span className='badge badge--best'>
                                     Best Results
                                 </span>
-
                             </label>
 
                             <label
@@ -210,7 +239,7 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
                             <span>OR</span>
                         </div>
 
-                        {/* Self Description */}
+                        {/* Quick Self-Description */}
                         <div className='self-description'>
 
                             <label
@@ -263,9 +292,9 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
                             </span>
 
                             <p>
-                                Either a <strong>Resume</strong> or a{" "}
-                                <strong>Self Description</strong> is required
-                                to generate a personalized plan.
+                                Either a <strong>Resume</strong> or a{' '}
+                                <strong>Self Description</strong> is required to
+                                generate a personalized plan.
                             </p>
 
                         </div>
@@ -304,7 +333,7 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
 
             </div>
 
-            {/* Recent Reports */}
+            {/* Recent Reports List */}
             {reports.length > 0 && (
 
                 <section className='recent-reports'>
@@ -328,7 +357,7 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
                                 </h3>
 
                                 <p className='report-meta'>
-                                    Generated on{" "}
+                                    Generated on{' '}
                                     {new Date(
                                         report.createdAt
                                     ).toLocaleDateString()}
@@ -370,3 +399,4 @@ e.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScri
 }
 
 export default Home
+
